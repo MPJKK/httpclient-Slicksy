@@ -9,6 +9,11 @@ import {HttpClient} from '@angular/common/http';
 export class HttpTestComponent implements OnInit {
 
     tulos = 'Moro';
+    apitulos = 'Moro taas';
+    apiosoite = 'http://media.mw.metropolia.fi/wbma';
+    kuvaosoite = 'http://media.mw.metropolia.fi/wbma/uploads/';
+    vrjuttu = 'https://rata.digitraffic.fi/api/v1/trains';
+
 
     constructor(private http: HttpClient) {
     }
@@ -23,8 +28,20 @@ export class HttpTestComponent implements OnInit {
         });
     }
 
+    getFromApi () {
+        //this.http.get(this.apiosoite + '/media').subscribe(data => {
+        //    console.log(data[0].filename);
+         //   this.apitulos = this.kuvaosoite + data[0].filename;
+
+            this.http.get(this.vrjuttu).subscribe(data => {
+                console.log(data);
+                this.juna = data;
+        });
+    }
+
     ngOnInit() {
         this.getJson();
+        this.getFromApi();
     }
 
 }
